@@ -1,0 +1,15 @@
+-r reqs.in
+black
+isort
+Sphinx
+pytest
+pytest-order
+tox
+pytest-cov
+codecov
+factory-boy
+freezegun
+pytest-dotenv
+text-unidecode
+myst-parser
+sphinx_rtd_theme

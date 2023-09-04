@@ -15,5 +15,16 @@ def get_setting(name):
     str
         value of key
     """
-    s = Settings.query.get(name)
-    return s.value
+    s = Settings.query.filter(Settings.setting == name).first()
+    if s is None:
+        return None
+    else:
+        return s.value
+
+
+
+def set_setting(key, value):
+    setting = Settings.query.filter(Settings.setting == key).first()
+    if setting:
+        setting.value = value
+        setting.update()

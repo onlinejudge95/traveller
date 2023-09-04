@@ -5,6 +5,8 @@
 #
 #
 import sys
+import json
+import os
 
 #
 ## The "/home/appinv" below specifies your home
@@ -14,11 +16,23 @@ import sys
 ## ...or uploaded files to the directory "myproject", then you should
 ## specify "/home/appinv/myproject"
 # on shell do pwd to get a path like this:'/home2/folder/shopyo/shopyo' set path to this
-path = ""
+
+base_path = os.path.dirname(os.path.abspath(__file__))
+path = base_path
 if path not in sys.path:
     sys.path.insert(0, path)
 #
-from app import app as application  # noqa
+from app import create_app  # noqa
+
+
+
+
+with open(os.path.join(base_path, "config.json")) as f:
+    config_json = json.load(f)
+environment = config_json["environment"]
+
+
+application = create_app(environment)
 
 #
 # NB -- many Flask guides suggest you use a file called run.py; that's
